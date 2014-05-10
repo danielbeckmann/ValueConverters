@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="ValueConverters.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ValueConverters"
+    xmlns:converter="using:ValueConverters.Converters"
+    xmlns:vm="using:ValueConverters.ViewModels">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Converters/Converters.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <vm:ExampleViewModel x:Key="ExampleViewModel" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

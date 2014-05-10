@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="ValueConverters.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ValueConverters.ViewModels"
+    mc:Ignorable="d"
+    DataContext="{StaticResource ExampleViewModel}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <TextBlock Text="BooleanInverted" FontSize="24"/>
+            <TextBox Grid.Column="1" PlaceholderText="Text eingeben..." Width="200" HorizontalAlignment="Left"
+                     IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanInvertedConverter}}" />
+
+            <TextBlock Grid.Row="1" Text="BooleanToVisibility" FontSize="24"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Es ist ein Fehler aufgetreten..." FontSize="24"
+                       Visibility="{Binding DisplayError, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Alles in Ordnung" FontSize="24"
+                       Visibility="{Binding DisplayError, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=1}"/>
+
+            <TextBlock Grid.Row="2" Text="CollectionToVisibility" FontSize="24"/>
+            <ItemsControl Grid.Row="2" Grid.Column="1"
+                          ItemsSource="{Binding StringList}"
+                          Visibility="{Binding StringList, Converter={StaticResource CollectionToVisibilityConverter}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="24"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Es sind keine Elemente vorhanden" FontSize="24"
+                        Visibility="{Binding StringList, Converter={StaticResource CollectionToVisibilityConverter}, ConverterParameter=1}"/>
+
+            <TextBlock Grid.Row="3" Text="DateTimeToCompact" FontSize="24"/>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="{Binding DateTime1, Converter={StaticResource DateTimeCompactConverter}}" FontSize="24"/>
+                <TextBlock Text="{Binding DateTime2, Converter={StaticResource DateTimeCompactConverter}}" FontSize="24" Margin="20,0"/>
+                <TextBlock Text="{Binding DateTime3, Converter={StaticResource DateTimeCompactConverter}}" FontSize="24" Margin="20,0"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="4" Text="DateTimeToString" FontSize="24"/>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="{Binding DateTime1, Converter={StaticResource DateTimeToStringConverter}}" FontSize="24"/>
+                <TextBlock Text="{Binding DateTime2, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='dd.MM.yyyy HH:mm:ss'}" FontSize="24" Margin="20,0"/>
+                <TextBlock Text="{Binding DateTime3, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='MM/dd/yyyy HH:mm'}" FontSize="24" Margin="20,0"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="5" Text="IntegerToAlternatingBrush" FontSize="24"/>
+            <ItemsControl Grid.Row="5" Grid.Column="1"
+                          ItemsSource="{Binding ItemList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{Binding Index, Converter={StaticResource IntegerToAlternatingBrushConverter}, ConverterParameter=1}">
+                            <TextBlock Text="{Binding Value}" FontSize="24"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Grid.Row="6" Text="ObjectToStringFormat" FontSize="24"/>
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="{Binding Currency, Converter={StaticResource ObjectToStringFormatConverter}, ConverterParameter='\{0:C\}'}" FontSize="24"/>
+                <TextBlock Text="{Binding Currency, Converter={StaticResource ObjectToStringFormatConverter}, ConverterParameter='\{0\} xyz'}" FontSize="24" Margin="20,0"/>
+                <TextBlock Text="{Binding DateTime1, Converter={StaticResource ObjectToStringFormatConverter}, ConverterParameter='\{0:d\}'}" FontSize="24" Margin="20,0"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="7" Text="StringToVisibility" FontSize="24"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding MyString}" FontSize="24"
+                       Visibility="{Binding MyString, Converter={StaticResource StringToVisibilityConverter}}"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ValueConverters.Converters"
+    xmlns:converter="using:ValueConverters.Converters">
+
+    <converter:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverter" />
+    <converter:DateTimeCompactConverter x:Key="DateTimeCompactConverter" />
+    <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+    <converter:IntegerToAlternatingBrushConverter x:Key="IntegerToAlternatingBrushConverter" />
+    <converter:ObjectToStringFormatConverter x:Key="ObjectToStringFormatConverter" />
+    <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+
+</ResourceDictionary>
